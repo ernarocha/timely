@@ -51,7 +51,7 @@ export default function Dashboard() {
             </div>
           </aside>
 
-          <section className="min-w-0 space-y-6">
+          <section className="min-w-0 space-y-6 xl:flex xl:self-stretch xl:flex-col">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <StatCard label="Week total" value={metrics.selectedHours} comparison="Selected Monday through Sunday" icon={Clock3} />
               <StatCard label="Daily average" value={metrics.dailyAverage} comparison="Across the selected week" icon={Sparkles} accent="lime" />

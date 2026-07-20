@@ -31,7 +31,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
   }
 
   return (
-    <Card className="max-w-[1080px] overflow-hidden">
+    <Card className="max-w-[1080px] overflow-hidden xl:flex xl:flex-1 xl:flex-col">
       <div className="flex items-end justify-between gap-2 px-4 pb-3 pt-4 sm:items-center sm:px-6 sm:pb-3 sm:pt-6">
         <div className="min-w-0"><p className="font-mono text-[9px] uppercase tracking-[.14em] text-muted dark:text-white/45 sm:text-[10px] sm:tracking-[.16em]">Weekly activity</p><h2 className="mt-1 whitespace-nowrap text-base font-bold sm:text-2xl">{weekLabel(selectedWeek)}</h2></div>
         <div className="flex shrink-0 items-center gap-2">
@@ -44,8 +44,8 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
       </div>
 
       {visibleEntries.length === 0 ? (
-        <div className="p-5 sm:p-8">
-          <div className="flex min-h-64 flex-col items-center justify-center rounded-3xl border border-dashed border-primary-container bg-surface-low/55 px-6 py-10 text-center dark:border-white/10 dark:bg-white/[.025]">
+        <div className="p-5 sm:p-8 xl:flex xl:flex-1">
+          <div className="flex min-h-64 w-full flex-col items-center justify-center rounded-3xl border border-dashed border-primary-container bg-surface-low/55 px-6 py-10 text-center dark:border-white/10 dark:bg-white/[.025] xl:flex-1">
             <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary-container/45 text-secondary shadow-sm dark:bg-white/10 dark:text-primary-container">
               <CalendarRange size={25} strokeWidth={1.8} />
             </div>
