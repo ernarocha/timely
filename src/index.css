@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; font-synthesis: none; background: #f0eef8; }
+:root.dark { color-scheme: dark; }
+* { box-sizing: border-box; }
+html { min-height: 100%; scroll-behavior: smooth; overscroll-behavior: none; }
+body { margin: 0; min-width: 320px; min-height: 100vh; overflow-x: hidden; overscroll-behavior: none; background: #f0eef8; color: #1a163c; font-family: 'Hanken Grotesk', sans-serif; }
+#root { min-height: 100vh; min-height: 100dvh; overscroll-behavior: none; background: #f0eef8; }
+.dark, .dark body, .dark #root { background: #171721; color: #f6f4ff; }
+button, input, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+::selection { background: #c9c3f3; color: #1a163c; }
+.scrollbar-thin { scrollbar-width: thin; scrollbar-color: #c9c5cf transparent; overscroll-behavior-x: contain; overscroll-behavior-y: auto; }
+.scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #c9c5cf; border-radius: 999px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
