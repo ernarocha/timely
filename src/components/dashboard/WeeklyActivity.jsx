@@ -11,7 +11,10 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
   const days = weekDays(selectedWeek)
   const visibleEntries = entriesForWeek(entries, selectedWeek)
   const viewingCurrentWeek = isSameDay(selectedWeek, getWeekStart())
-  const [expandedDays, setExpandedDays] = useState(() => new Set())
+  const [expandedDays, setExpandedDays] = useState(() => {
+    const currentDay = weekDays(selectedWeek).find(isToday)
+    return new Set(currentDay ? [currentDay.toISOString()] : [])
+  })
 
   useEffect(() => {
     const currentDay = weekDays(selectedWeek).find(isToday)
