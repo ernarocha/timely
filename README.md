@@ -11,7 +11,7 @@ TimeFrame is a polished, frontend-only time tracker built to help a team record 
 - Review hours for the current week, today, progress towards a 40-hour weekly target, and totals by project.
 - Switch between light and dark mode; the preference persists.
 - Use a responsive interface: an expandable desktop sidebar becomes a mobile bottom navigation, and the content reflows for smaller screens.
-- Start with a clean dashboard on every new account, ready for the user's first time entry.
+- Start with a clean current week and clearly labelled sample entries in the previous week, so both empty and populated states are easy to evaluate.
 
 ## Requirements
 
@@ -48,7 +48,7 @@ npm test
 ## Quick evaluation flow
 
 1. Open `/signup` and create an account with a name, email address, and password.
-2. Confirm the dashboard opens with an empty weekly activity view and zeroed totals.
+2. Confirm the current week opens with an empty weekly activity view and zeroed totals. Use the previous-week arrow to inspect the labelled sample entries.
 3. Select **Add time entry**.
 4. Choose a project, enter a task description and hours, then select **Save entry**.
 5. The entry appears under today with the time captured when it was saved. The statistics and Project Summary update immediately.
@@ -92,7 +92,7 @@ All direct browser-storage access is isolated in `src/utils/storage.js`.
 - The timestamp is automatic and not editable, matching the requirement that the current date and time be recorded while keeping logging fast.
 - Weeks start on Monday, matching the supplied visual reference and common work-planning conventions.
 - A 40-hour target is a planning indicator only, not a restriction.
-- New accounts intentionally start empty so evaluators can verify the complete add-entry flow themselves.
+- The current week intentionally starts empty so evaluators can verify the complete add-entry flow. Clearly labelled samples live only in the previous week to demonstrate the populated weekly view.
 - Editing, deleting, timers, and cloud sync are deliberately out of scope so the submission stays focused on the stated objective.
 
 ## Test-process feedback
