@@ -31,7 +31,13 @@ export default function WeeklyActivity({
     })
     return grouped
   }, [days, visibleEntries])
-  const viewingCurrentWeek = isSameDay(selectedWeek, getWeekStart())
+  const currentWeekStart = getWeekStart()
+  const viewingCurrentWeek = isSameDay(selectedWeek, currentWeekStart)
+  const weekStatus = viewingCurrentWeek
+    ? 'current'
+    : selectedWeek < currentWeekStart
+      ? 'past'
+      : 'future'
   const [expandedDays, setExpandedDays] = useState(() => {
     const currentDay = weekDays(selectedWeek).find(isToday)
     return new Set(currentDay ? [currentDay.toISOString()] : [])
@@ -93,7 +99,7 @@ export default function WeeklyActivity({
 
       {visibleEntries.length === 0 ? (
         <WeeklyEmptyState
-          viewingCurrentWeek={viewingCurrentWeek}
+          weekStatus={weekStatus}
           onAddEntry={onAddEntry}
           onReturnToCurrentWeek={returnToCurrentWeek}
         />
