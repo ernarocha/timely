@@ -7,6 +7,7 @@ export default function Modal({ open, onClose, title, description, children }) {
   useEffect(() => {
     if (!open) return undefined
     const previous = document.activeElement
+    // Keep keyboard focus inside the dialog so background controls are not reachable while it is open.
     const onKeyDown = (event) => {
       if (event.key === 'Escape') onClose()
       if (event.key === 'Tab' && panelRef.current) {

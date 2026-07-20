@@ -89,6 +89,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
               </div>
 
               {dayEntries.length ? <div className="min-w-0 self-center">
+                {/* Both states stay mounted so CSS Grid can animate their height without measuring content in JavaScript. */}
                 <div aria-hidden={!expanded} className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                   <div className="min-h-0 overflow-hidden">
                     <div className="space-y-2">{dayEntries.map((entry) => {

@@ -15,6 +15,8 @@ const legacySampleDescriptions = new Set([
 ])
 
 function makePreviousWeekSamples(userId) {
+  // Samples live in the previous week so a new user can test the current empty state
+  // while still having a populated week to inspect; isSample keeps them identifiable.
   const previousWeek = addDays(getWeekStart(), -7)
   const samples = [
     { day: 0, hour: 9, minute: 30, project: 'Website Redesign', description: 'Sample · Design review', hours: 1.5 },
