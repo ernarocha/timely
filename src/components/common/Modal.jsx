@@ -32,7 +32,7 @@ export default function Modal({ open, onClose, title, description, children }) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description">
       <button aria-label="Close modal" className="absolute inset-0 cursor-default bg-[#171526]/55 backdrop-blur-sm" onClick={onClose} />
-      <div ref={panelRef} className="relative max-h-[calc(100vh-2rem)] w-full max-w-[480px] animate-pop overflow-y-auto rounded-4xl border border-primary-container/40 bg-white p-6 shadow-lift dark:border-white/10 dark:bg-midnight-card sm:p-8">
+      <div ref={panelRef} className="relative max-h-[calc(100vh-2rem)] w-full max-w-[480px] animate-pop overflow-x-hidden overflow-y-auto rounded-4xl border border-primary-container/40 bg-white p-6 shadow-lift dark:border-white/10 dark:bg-midnight-card sm:p-8">
         <div className="mb-6 flex items-start justify-between gap-4">
           <div>
             <h2 id="modal-title" className="text-2xl font-bold text-ink dark:text-white">{title}</h2>

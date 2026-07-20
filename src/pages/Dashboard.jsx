@@ -4,6 +4,7 @@ import DashboardLayout from '../components/layout/DashboardLayout'
 import MiniCalendar from '../components/dashboard/MiniCalendar'
 import ProjectSummary from '../components/dashboard/ProjectSummary'
 import StatCard from '../components/dashboard/StatCard'
+import TimeEntryDetailsModal from '../components/dashboard/TimeEntryDetailsModal'
 import WeeklyActivity from '../components/dashboard/WeeklyActivity'
 import TimeEntryModal from '../components/forms/TimeEntryModal'
 import { useAuth } from '../context/AuthContext'
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const { entries, addEntry } = useTimeEntries(user.id)
   const [selectedWeek, setSelectedWeek] = useState(getWeekStart)
   const [modalOpen, setModalOpen] = useState(false)
+  const [selectedEntry, setSelectedEntry] = useState(null)
   const metrics = useMemo(() => {
     const selectedEntries = entriesForWeek(entries, selectedWeek)
     const selectedHours = sumHours(selectedEntries)
@@ -55,11 +57,12 @@ export default function Dashboard() {
               <StatCard label="Daily average" value={metrics.dailyAverage} comparison="Across the selected week" icon={Sparkles} accent="lime" />
               <StatCard label="Weekly target" value={Math.round((metrics.selectedHours / WEEKLY_HOUR_TARGET) * 100)} comparison={`${metrics.selectedHours.toLocaleString(undefined, { maximumFractionDigits: 1 })} of ${WEEKLY_HOUR_TARGET} hrs logged`} icon={Target} accent="peach" unit="% complete" progress={(metrics.selectedHours / WEEKLY_HOUR_TARGET) * 100} />
             </div>
-            <WeeklyActivity entries={entries} selectedWeek={selectedWeek} onWeekChange={setSelectedWeek} onAddEntry={() => setModalOpen(true)} />
+            <WeeklyActivity entries={entries} selectedWeek={selectedWeek} onWeekChange={setSelectedWeek} onAddEntry={() => setModalOpen(true)} onEntrySelect={setSelectedEntry} />
           </section>
         </div>
       </main>
       <TimeEntryModal open={modalOpen} onClose={() => setModalOpen(false)} onSave={addEntry} />
+      <TimeEntryDetailsModal entry={selectedEntry} onClose={() => setSelectedEntry(null)} />
     </DashboardLayout>
   )
 }

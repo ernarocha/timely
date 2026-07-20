@@ -6,7 +6,7 @@ import { entriesForWeek, formatHours } from '../../utils/timeCalculations'
 import Button from '../common/Button'
 import Card from '../common/Card'
 
-export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, onAddEntry }) {
+export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, onAddEntry, onEntrySelect }) {
   const days = weekDays(selectedWeek)
   const visibleEntries = entriesForWeek(entries, selectedWeek)
   const viewingCurrentWeek = isSameDay(selectedWeek, getWeekStart())
@@ -67,14 +67,14 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
               {dayEntries.length ? <div className="space-y-2">{dayEntries.map((entry) => {
                 const project = projectStyle(entry.project)
                 return (
-                  <article key={entry.id} className="flex min-w-0 items-center gap-3 rounded-2xl border border-white/80 bg-white px-3.5 py-3 shadow-sm transition hover:-translate-y-0.5 hover:shadow-ambient dark:border-white/5 dark:bg-white/[.055]">
+                  <button type="button" key={entry.id} onClick={() => onEntrySelect(entry)} aria-label={`View details for ${entry.description}`} className="flex w-full min-w-0 items-center gap-3 rounded-2xl border border-white/80 bg-white px-3.5 py-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-ambient focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:border-white/5 dark:bg-white/[.055]">
                     <span className="h-9 w-1 shrink-0 rounded-full" style={{ backgroundColor: project.color }} />
                     <div className="flex min-w-0 flex-1 items-center gap-2">
                       <div className="min-w-0 flex-1 basis-0"><p className="truncate text-sm font-bold text-ink dark:text-white">{entry.project}</p><p className="mt-0.5 font-mono text-[10px] leading-none text-muted dark:text-white/45">{format(new Date(entry.startAt), 'h:mm a')}</p></div>
                       <span className="min-w-0 flex-1 basis-0 truncate text-center text-xs font-semibold leading-none text-ink dark:text-white">{entry.description}</span>
                       <span className="min-w-0 flex-1 basis-0 text-right font-mono text-xs font-bold leading-none text-ink dark:text-white">{formatHours(entry.hours)}h</span>
                     </div>
-                  </article>
+                  </button>
                 )
               })}</div> : <div className="flex min-h-11 items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 sm:self-center dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
             </section>
