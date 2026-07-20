@@ -1,8 +1,8 @@
-import { BarChart3, CalendarDays, Clock3, TimerReset } from 'lucide-react'
+import { BarChart3, Clock3, LayoutDashboard, TimerReset } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
 const navItems = [
-  { label: 'Dashboard', Icon: CalendarDays, to: '/dashboard' },
+  { label: 'Dashboard', Icon: LayoutDashboard, to: '/dashboard' },
   { label: 'Overview', Icon: BarChart3, to: '/overview' },
   { label: 'Timer', Icon: Clock3, to: '/timer' },
 ]
