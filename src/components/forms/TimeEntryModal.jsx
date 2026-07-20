@@ -16,8 +16,15 @@ const initialForm = () => {
 export default function TimeEntryModal({ open, onClose, onSave }) {
   const [form, setForm] = useState(initialForm)
   const [error, setError] = useState('')
-  const [recordedAt, setRecordedAt] = useState(() => new Date())
-  useEffect(() => { if (open) { setForm(initialForm()); setError(''); setRecordedAt(new Date()) } }, [open])
+  const [currentTime, setCurrentTime] = useState(() => new Date())
+  useEffect(() => {
+    if (!open) return undefined
+    setForm(initialForm())
+    setError('')
+    setCurrentTime(new Date())
+    const timer = window.setInterval(() => setCurrentTime(new Date()), 1000)
+    return () => window.clearInterval(timer)
+  }, [open])
   const update = (key) => (event) => setForm((current) => ({ ...current, [key]: event.target.value }))
   const submit = (event) => {
     event.preventDefault()
@@ -25,7 +32,7 @@ export default function TimeEntryModal({ open, onClose, onSave }) {
     if (!form.project) return setError('Select a project for this time entry.')
     if (!form.description.trim()) return setError('Add a short description of the work.')
     if (!isValidEntryHours(hours)) return setError(`Hours must be between ${MIN_ENTRY_HOURS} and ${MAX_ENTRY_HOURS}.`)
-    onSave({ project: form.project, description: form.description.trim(), hours, startAt: recordedAt.toISOString() })
+    onSave({ project: form.project, description: form.description.trim(), hours, startAt: new Date().toISOString() })
     onClose()
   }
   return (
@@ -47,7 +54,7 @@ export default function TimeEntryModal({ open, onClose, onSave }) {
         </div>
         {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-950/40 dark:text-red-300">{error}</p>}
         <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-end sm:justify-between">
-          <p className="whitespace-nowrap font-mono text-[10px] text-muted dark:text-white/50">{format(recordedAt, 'MMM d, yyyy · h:mm a')}</p>
+          <p className="whitespace-nowrap font-mono text-[10px] text-muted dark:text-white/50">{format(currentTime, 'MMM d, yyyy · h:mm a')}</p>
           <div className="flex gap-3">
             <Button variant="soft" className="flex-1 sm:flex-none" onClick={onClose}>Cancel</Button>
             <Button variant="lime" className="flex-1 sm:flex-none" type="submit"><Plus size={18} /> Save entry</Button>

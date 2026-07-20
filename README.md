@@ -2,13 +2,17 @@
 
 Timely is a polished, frontend-only time tracker built to help a team record work in a few clicks. It uses React, Vite, Tailwind CSS, React Router, date-fns, Lucide icons, and browser `localStorage`—no backend or database is required.
 
+## Live demo
+
+[Open Timely on Vercel](https://timely-rho.vercel.app/)
+
 ## Features
 
 - Sign up, log in, stay signed in after refresh, and log out.
 - Add a time entry from a modal with a required project, task description, and 0.25 to 8 hours.
 - Automatically capture the current date and time when an entry is saved.
 - See a Monday–Sunday activity view with recorded time, project, and duration.
-- Review hours for the current week, today, progress towards a 40-hour weekly target, and totals by project.
+- Review the selected week's total and daily average, progress towards a 40-hour weekly target, and totals by project.
 - Switch between light and dark mode; the preference persists.
 - Use a responsive interface: an expandable desktop sidebar becomes a mobile bottom navigation, and the content reflows for smaller screens.
 - Start with a clean current week and clearly labelled sample entries in the previous week, so both empty and populated states are easy to evaluate.
@@ -88,6 +92,7 @@ All direct browser-storage access is isolated in `src/utils/storage.js`.
 ## Assumptions and trade-offs
 
 - This is a frontend-only take-home, so authentication is demonstrative. Passwords are lightly encoded and must not be treated as secure production authentication; a real product needs server-side hashing and secure sessions.
+- Accounts, sessions, and entries are local to the current browser and device. They do not synchronize between a laptop and phone because the brief requires `localStorage` with no backend.
 - Projects are a pre-filled static list because project administration is outside the requested scope.
 - The timestamp is automatic and not editable, matching the requirement that the current date and time be recorded while keeping logging fast.
 - Weeks start on Monday, matching the supplied visual reference and common work-planning conventions.
