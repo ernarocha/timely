@@ -1,13 +1,15 @@
 import { addDays, format, isSameDay } from 'date-fns'
-import { CalendarRange, ChevronLeft, ChevronRight } from 'lucide-react'
+import { CalendarRange, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
 import { projectStyle } from '../../data/projects'
 import { getWeekStart, isToday, weekDays, weekLabel } from '../../utils/dates'
 import { entriesForWeek, formatHours } from '../../utils/timeCalculations'
+import Button from '../common/Button'
 import Card from '../common/Card'
 
-export default function WeeklyActivity({ entries, selectedWeek, onWeekChange }) {
+export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, onAddEntry }) {
   const days = weekDays(selectedWeek)
   const visibleEntries = entriesForWeek(entries, selectedWeek)
+  const viewingCurrentWeek = isSameDay(selectedWeek, getWeekStart())
 
   return (
     <Card className="max-w-[1080px] overflow-hidden">
@@ -22,7 +24,24 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange }) 
         </div>
       </div>
 
-      <div className="divide-y divide-line dark:divide-white/5">
+      {visibleEntries.length === 0 ? (
+        <div className="p-5 sm:p-8">
+          <div className="flex min-h-64 flex-col items-center justify-center rounded-3xl border border-dashed border-primary-container bg-surface-low/55 px-6 py-10 text-center dark:border-white/10 dark:bg-white/[.025]">
+            <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary-container/45 text-secondary shadow-sm dark:bg-white/10 dark:text-primary-container">
+              <CalendarRange size={25} strokeWidth={1.8} />
+            </div>
+            <p className="mt-5 font-mono text-[10px] uppercase tracking-[.18em] text-secondary dark:text-primary-container">Nothing logged yet</p>
+            <h3 className="mt-2 text-xl font-bold text-ink dark:text-white">{viewingCurrentWeek ? 'Your week is ready.' : 'No entries for this week.'}</h3>
+            <p className="mt-2 max-w-sm text-sm leading-6 text-muted dark:text-white/50">
+              {viewingCurrentWeek ? 'Add your first task and TimeFrame will build your weekly totals automatically.' : 'Return to the current week to record new work with the automatic timestamp.'}
+            </p>
+            <Button className="mt-5" variant="lime" onClick={viewingCurrentWeek ? onAddEntry : () => onWeekChange(getWeekStart())}>
+              {viewingCurrentWeek && <Plus size={18} />}
+              {viewingCurrentWeek ? 'Add your first entry' : 'Back to this week'}
+            </Button>
+          </div>
+        </div>
+      ) : <div className="divide-y divide-line dark:divide-white/5">
         {days.map((day) => {
           const dayEntries = visibleEntries.filter((entry) => isSameDay(new Date(entry.startAt), day)).sort((a, b) => new Date(a.startAt) - new Date(b.startAt))
           const today = isToday(day)
@@ -49,7 +68,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange }) 
             </section>
           )
         })}
-      </div>
+      </div>}
     </Card>
   )
 }

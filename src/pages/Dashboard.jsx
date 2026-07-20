@@ -54,7 +54,7 @@ export default function Dashboard() {
               <StatCard label="Hours today" value={metrics.today} comparison="Your focused time today" icon={Sparkles} accent="lime" />
               <StatCard label="Weekly target" value={Math.round((metrics.thisWeek / WEEKLY_HOUR_TARGET) * 100)} comparison={`${metrics.thisWeek.toLocaleString(undefined, { maximumFractionDigits: 1 })} of ${WEEKLY_HOUR_TARGET} hrs logged`} icon={Target} accent="peach" unit="% complete" progress={(metrics.thisWeek / WEEKLY_HOUR_TARGET) * 100} />
             </div>
-            <WeeklyActivity entries={entries} selectedWeek={selectedWeek} onWeekChange={setSelectedWeek} />
+            <WeeklyActivity entries={entries} selectedWeek={selectedWeek} onWeekChange={setSelectedWeek} onAddEntry={() => setModalOpen(true)} />
           </section>
         </div>
       </main>
