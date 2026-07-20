@@ -41,7 +41,7 @@ export default function ActivityDay({ day, entries, expanded, onToggle, onEntryS
               isExpanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
             }`}
           >
-            <div className="min-h-0 overflow-hidden">
+            <div className={`min-h-0 ${isExpanded ? 'overflow-visible' : 'overflow-hidden'}`}>
               <div className="space-y-2">
                 {entries.map((entry) => (
                   <ActivityEntryRow
