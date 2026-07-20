@@ -78,7 +78,8 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
           const dayEntries = visibleEntries.filter((entry) => isSameDay(new Date(entry.startAt), day)).sort((a, b) => new Date(a.startAt) - new Date(b.startAt))
           const today = isToday(day)
           const dayKey = day.toISOString()
-          const expanded = expandedDays.has(dayKey)
+          const canCollapse = dayEntries.length > 1
+          const expanded = !canCollapse || expandedDays.has(dayKey)
           const dayHours = dayEntries.reduce((total, entry) => total + Number(entry.hours || 0), 0)
           return (
             <section key={dayKey} className={`grid grid-cols-[44px_minmax(0,1fr)_36px] items-start gap-2 px-2 py-3 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)_40px] sm:gap-3 sm:px-6 sm:py-4 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
@@ -111,7 +112,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
                   </div>
                 </div>
               </div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
-              {dayEntries.length ? <button type="button" aria-expanded={expanded} aria-label={`${expanded ? 'Hide' : 'View'} ${format(day, 'EEEE')} entries`} title={`${expanded ? 'Hide' : 'View'} entries`} onClick={() => toggleDay(dayKey)} className="mt-3 grid h-9 w-9 place-items-center rounded-full text-secondary transition hover:bg-primary-container/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:text-primary-container dark:hover:bg-white/10">{expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button> : <span aria-hidden="true" />}
+              {canCollapse ? <button type="button" aria-expanded={expanded} aria-label={`${expanded ? 'Hide' : 'View'} ${format(day, 'EEEE')} entries`} title={`${expanded ? 'Hide' : 'View'} entries`} onClick={() => toggleDay(dayKey)} className="mt-3 grid h-9 w-9 place-items-center rounded-full text-secondary transition hover:bg-primary-container/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:text-primary-container dark:hover:bg-white/10">{expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button> : <span aria-hidden="true" />}
             </section>
           )
         })}
