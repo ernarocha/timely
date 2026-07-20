@@ -1,10 +1,15 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { addMonths, eachDayOfInterval, endOfMonth, format, isSameDay, isSameMonth, isWithinInterval, startOfMonth, subMonths } from 'date-fns'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getWeekEnd, getWeekStart } from '../../utils/dates'
 
 export default function MiniCalendar({ selectedWeek, onSelectWeek }) {
   const [month, setMonth] = useState(startOfMonth(selectedWeek))
+
+  useEffect(() => {
+    setMonth(startOfMonth(selectedWeek))
+  }, [selectedWeek])
+
   const days = useMemo(() => {
     const first = getWeekStart(startOfMonth(month))
     const last = getWeekEnd(endOfMonth(month))
