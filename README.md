@@ -19,7 +19,7 @@ Timely is a polished, frontend-only time tracker built to help a team record wor
 
 ## Requirements
 
-- Node.js `20.19+` or `22.12+`
+- Node.js `20.19+` or `22.13+`
 - npm `10+`
 - A modern browser with `localStorage` enabled
 
