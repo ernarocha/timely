@@ -13,7 +13,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
 
   return (
     <Card className="max-w-[1080px] overflow-hidden">
-      <div className="flex flex-col gap-4 border-b border-line p-5 dark:border-white/5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+      <div className="flex flex-col gap-4 px-5 pb-3 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pb-3 sm:pt-6">
         <div><p className="font-mono text-[10px] uppercase tracking-[.16em] text-muted dark:text-white/45">Weekly activity</p><h2 className="mt-1 text-xl font-bold sm:text-2xl">{weekLabel(selectedWeek)}</h2></div>
         <div className="flex items-center gap-2">
           <button onClick={() => onWeekChange(getWeekStart())} className="h-10 rounded-full bg-surface-low px-4 text-sm font-semibold transition hover:bg-primary-container/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:bg-white/10 dark:hover:bg-white/15">Today</button>
@@ -41,7 +41,19 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
             </Button>
           </div>
         </div>
-      ) : <div className="divide-y divide-line dark:divide-white/5">
+      ) : <div>
+        <div className="grid border-b border-line px-5 pb-3 dark:border-white/5 sm:grid-cols-[76px_minmax(0,1fr)] sm:px-6">
+          <span className="hidden sm:block" aria-hidden="true" />
+          <div className="flex min-w-0 gap-3 px-3.5">
+            <span className="w-1 shrink-0" aria-hidden="true" />
+            <div className="flex min-w-0 flex-1 gap-2 font-mono text-[10px] font-semibold uppercase tracking-[.14em] text-muted dark:text-white/45">
+              <span className="min-w-0 flex-1 basis-0">Project</span>
+              <span className="min-w-0 flex-1 basis-0 text-center">Task</span>
+              <span className="min-w-0 flex-1 basis-0 text-right">Hours</span>
+            </div>
+          </div>
+        </div>
+        <div className="divide-y divide-line dark:divide-white/5">
         {days.map((day) => {
           const dayEntries = visibleEntries.filter((entry) => isSameDay(new Date(entry.startAt), day)).sort((a, b) => new Date(a.startAt) - new Date(b.startAt))
           const today = isToday(day)
@@ -68,6 +80,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
             </section>
           )
         })}
+        </div>
       </div>}
     </Card>
   )
