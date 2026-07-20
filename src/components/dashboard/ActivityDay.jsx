@@ -9,10 +9,13 @@ export default function ActivityDay({ day, entries, expanded, onToggle, onEntryS
   const canCollapse = entries.length > 1
   const isExpanded = !canCollapse || expanded
   const dayHours = entries.reduce((total, entry) => total + Number(entry.hours || 0), 0)
+  const columns = canCollapse
+    ? 'grid-cols-[44px_minmax(0,1fr)_36px] sm:grid-cols-[76px_minmax(0,1fr)_40px]'
+    : 'grid-cols-[44px_minmax(0,1fr)] sm:grid-cols-[76px_minmax(0,1fr)]'
 
   return (
     <section
-      className={`grid grid-cols-[44px_minmax(0,1fr)_36px] items-start gap-2 px-2 py-3 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)_40px] sm:gap-3 sm:px-6 sm:py-4 ${
+      className={`grid ${columns} items-start gap-2 px-2 py-3 transition-colors duration-200 sm:gap-3 sm:px-6 sm:py-4 ${
         today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'
       }`}
     >
@@ -83,9 +86,7 @@ export default function ActivityDay({ day, entries, expanded, onToggle, onEntryS
         >
           {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
         </button>
-      ) : (
-        <span aria-hidden="true" />
-      )}
+      ) : null}
     </section>
   )
 }
