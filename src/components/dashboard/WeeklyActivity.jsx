@@ -1,5 +1,6 @@
+import { useEffect, useState } from 'react'
 import { addDays, format, isSameDay } from 'date-fns'
-import { CalendarRange, ChevronLeft, ChevronRight, Plus } from 'lucide-react'
+import { CalendarRange, ChevronLeft, ChevronRight, Eye, EyeOff, Plus } from 'lucide-react'
 import { projectStyle } from '../../data/projects'
 import { getWeekStart, isToday, weekDays, weekLabel } from '../../utils/dates'
 import { entriesForWeek, formatHours } from '../../utils/timeCalculations'
@@ -10,6 +11,21 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
   const days = weekDays(selectedWeek)
   const visibleEntries = entriesForWeek(entries, selectedWeek)
   const viewingCurrentWeek = isSameDay(selectedWeek, getWeekStart())
+  const [expandedDays, setExpandedDays] = useState(() => new Set())
+
+  useEffect(() => {
+    const currentDay = weekDays(selectedWeek).find(isToday)
+    setExpandedDays(new Set(currentDay ? [currentDay.toISOString()] : []))
+  }, [selectedWeek])
+
+  const toggleDay = (dayKey) => {
+    setExpandedDays((current) => {
+      const next = new Set(current)
+      if (next.has(dayKey)) next.delete(dayKey)
+      else next.add(dayKey)
+      return next
+    })
+  }
 
   return (
     <Card className="max-w-[1080px] overflow-hidden">
@@ -42,7 +58,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
           </div>
         </div>
       ) : <div>
-        <div className="grid grid-cols-[44px_minmax(0,1fr)] border-b border-line px-2 pb-3 dark:border-white/5 sm:grid-cols-[76px_minmax(0,1fr)] sm:px-6">
+        <div className="grid grid-cols-[44px_minmax(0,1fr)_36px] border-b border-line px-2 pb-3 dark:border-white/5 sm:grid-cols-[76px_minmax(0,1fr)_40px] sm:px-6">
           <span aria-hidden="true" />
           <div className="flex min-w-0 gap-3 px-3.5">
             <span className="w-1 shrink-0" aria-hidden="true" />
@@ -52,19 +68,23 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
               <span className="min-w-0 flex-1 basis-0 text-right">Hours</span>
             </div>
           </div>
+          <span aria-hidden="true" />
         </div>
         <div className="divide-y divide-line dark:divide-white/5">
         {days.map((day) => {
           const dayEntries = visibleEntries.filter((entry) => isSameDay(new Date(entry.startAt), day)).sort((a, b) => new Date(a.startAt) - new Date(b.startAt))
           const today = isToday(day)
+          const dayKey = day.toISOString()
+          const expanded = expandedDays.has(dayKey)
+          const dayHours = dayEntries.reduce((total, entry) => total + Number(entry.hours || 0), 0)
           return (
-            <section key={day.toISOString()} className={`grid grid-cols-[44px_minmax(0,1fr)] items-start gap-2 px-2 py-3 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)] sm:gap-3 sm:px-6 sm:py-4 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
+            <section key={dayKey} className={`grid grid-cols-[44px_minmax(0,1fr)_36px] items-start gap-2 px-2 py-3 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)_40px] sm:gap-3 sm:px-6 sm:py-4 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
               <div className="flex flex-col items-center gap-0">
                 <p className="font-mono text-[10px] uppercase tracking-wide text-muted dark:text-white/45">{format(day, 'EEE')}</p>
                 <p className={`mt-1 grid h-9 w-9 place-items-center rounded-full text-lg font-bold ${today ? 'bg-lime text-[#293a00]' : 'bg-primary-container/30 dark:bg-white/[.07]'}`}>{format(day, 'd')}</p>
               </div>
 
-              {dayEntries.length ? <div className="space-y-2">{dayEntries.map((entry) => {
+              {dayEntries.length ? expanded ? <div className="space-y-2">{dayEntries.map((entry) => {
                 const project = projectStyle(entry.project)
                 return (
                   <button type="button" key={entry.id} onClick={() => onEntrySelect(entry)} aria-label={`View details for ${entry.description}`} className="flex w-full min-w-0 items-center gap-2 rounded-2xl border border-white/80 bg-white px-3 py-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-ambient focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:border-white/5 dark:bg-white/[.055] sm:gap-3 sm:px-3.5">
@@ -76,7 +96,8 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
                     </div>
                   </button>
                 )
-              })}</div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
+              })}</div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> {dayEntries.length} {dayEntries.length === 1 ? 'entry' : 'entries'} · {formatHours(dayHours)}h logged</div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
+              {dayEntries.length ? <button type="button" aria-expanded={expanded} aria-label={`${expanded ? 'Hide' : 'View'} ${format(day, 'EEEE')} entries`} title={`${expanded ? 'Hide' : 'View'} entries`} onClick={() => toggleDay(dayKey)} className="mt-3 grid h-9 w-9 place-items-center rounded-full text-secondary transition hover:bg-primary-container/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:text-primary-container dark:hover:bg-white/10">{expanded ? <EyeOff size={17} /> : <Eye size={17} />}</button> : <span aria-hidden="true" />}
             </section>
           )
         })}
