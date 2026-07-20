@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext'
 export default function Login() {
   const { user } = useAuth()
   if (user) return <Navigate to="/dashboard" replace />
-  return <AuthShell eyebrow="Welcome back" title="Make every hour count." copy="A calm, clear view of your week—so logging work never gets in the way of doing it." formEyebrow="Account access" formTitle="Sign in to Timely" formCopy="Enter your details to continue to your workspace."><LoginForm /></AuthShell>
+  return <AuthShell eyebrow="Welcome back" title="Make every hour count." copy="A calm, clear view of your week, so logging work never gets in the way of doing it." formEyebrow="Account access" formTitle="Log in to Timely" formCopy="Enter your details to continue to your workspace."><LoginForm /></AuthShell>
 }
 
 export function AuthShell({ eyebrow, title, copy, formEyebrow, formTitle, formCopy, children }) {
@@ -21,7 +21,6 @@ export function AuthShell({ eyebrow, title, copy, formEyebrow, formTitle, formCo
           <p className="font-mono text-xs uppercase tracking-[.18em] text-secondary dark:text-primary-container">{eyebrow}</p>
           <h1 className="mt-4 max-w-xl text-6xl font-bold leading-[.98] tracking-[-.045em] text-ink dark:text-white">{title}</h1>
           <p className="mt-6 max-w-md text-lg leading-8 text-muted dark:text-white/60">{copy}</p>
-          <div className="mt-10 flex items-center gap-3 font-mono text-xs text-muted dark:text-white/50"><span className="h-2.5 w-2.5 animate-pulse rounded-full bg-lime" /> Your week, in focus</div>
         </section>
         <Card className="relative p-5 sm:p-9">
           <div className="mb-7 lg:hidden"><div className="mb-6 flex items-center gap-3 text-xl font-extrabold"><span className="grid h-11 w-11 place-items-center rounded-2xl bg-ink text-primary-container dark:bg-primary-container dark:text-ink"><TimerReset size={22} /></span>Timely</div></div>

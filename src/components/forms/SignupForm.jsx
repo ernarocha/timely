@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import Button from '../common/Button'
 import Input from '../common/Input'
@@ -25,15 +24,15 @@ export default function SignupForm() {
 
   return (
     <form className="space-y-4" onSubmit={submit} noValidate>
-      <Input label="Full name" name="name" autoComplete="name" placeholder="Alex Morgan" value={form.name} onChange={update('name')} required />
-      <Input label="Work email" name="email" type="email" autoComplete="email" placeholder="you@company.com" value={form.email} onChange={update('email')} required />
+      <Input label="Full Name" name="name" autoComplete="name" placeholder="Alex Morgan" value={form.name} onChange={update('name')} required />
+      <Input label="Work Email" name="email" type="email" autoComplete="email" placeholder="you@company.com" value={form.email} onChange={update('email')} required />
       <div className="grid gap-4 sm:grid-cols-2">
         <Input label="Password" name="password" type="password" autoComplete="new-password" placeholder="8+ characters" value={form.password} onChange={update('password')} required />
-        <Input label="Confirm" name="confirm" type="password" autoComplete="new-password" placeholder="Repeat password" value={form.confirm} onChange={update('confirm')} required />
+        <Input label="Confirm Password" name="confirm" type="password" autoComplete="new-password" placeholder="Repeat password" value={form.confirm} onChange={update('confirm')} required />
       </div>
       {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-950/40 dark:text-red-300">{error}</p>}
-      <Button type="submit" className="w-full">Create account <ArrowRight size={18} /></Button>
-      <p className="text-center text-sm text-muted dark:text-white/60">Already have an account? <Link className="font-bold text-secondary hover:underline dark:text-primary-container" to="/login">Sign in</Link></p>
+      <Button type="submit" className="w-full">Create account</Button>
+      <p className="text-center text-sm text-muted dark:text-white/60">Already have an account? <Link className="font-bold text-secondary hover:underline dark:text-primary-container" to="/login">Log in</Link></p>
     </form>
   )
 }

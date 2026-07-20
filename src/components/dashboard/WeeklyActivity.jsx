@@ -44,8 +44,8 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
       </div>
 
       {visibleEntries.length === 0 ? (
-        <div className="p-5 sm:p-8 xl:flex xl:flex-1">
-          <div className="flex min-h-64 w-full flex-col items-center justify-center rounded-3xl border border-dashed border-primary-container bg-surface-low/55 px-6 py-10 text-center dark:border-white/10 dark:bg-white/[.025] xl:flex-1">
+        <div className="p-5 sm:p-8 xl:flex xl:flex-1 xl:p-6">
+          <div className="flex min-h-64 w-full flex-col items-center justify-center rounded-3xl border border-dashed border-primary-container bg-surface-low/55 px-6 py-10 text-center dark:border-white/10 dark:bg-white/[.025] xl:flex-1 xl:py-6">
             <div className="grid h-14 w-14 place-items-center rounded-2xl bg-primary-container/45 text-secondary shadow-sm dark:bg-white/10 dark:text-primary-container">
               <CalendarRange size={25} strokeWidth={1.8} />
             </div>
