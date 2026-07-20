@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { addDays, set } from 'date-fns'
 import { getWeekStart } from '../utils/dates'
 import { getEntries, saveEntries } from '../utils/storage'
+import { MAX_ENTRY_HOURS, MIN_ENTRY_HOURS, isValidEntryHours } from '../utils/timeEntryValidation'
 
 const makeId = () => globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`
 
@@ -54,6 +55,9 @@ export function useTimeEntries(userId) {
   useEffect(() => setEntries(loadForUser(userId)), [userId])
 
   const addEntry = useCallback((data) => {
+    if (!isValidEntryHours(data.hours)) {
+      throw new RangeError(`Entry hours must be between ${MIN_ENTRY_HOURS} and ${MAX_ENTRY_HOURS}.`)
+    }
     const entry = { ...data, id: makeId(), userId, hours: Number(data.hours), createdAt: new Date().toISOString() }
     const all = getEntries()
     saveEntries([...all, entry])

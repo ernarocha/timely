@@ -7,6 +7,7 @@ import Input from '../common/Input'
 import Modal from '../common/Modal'
 import Select from '../common/Select'
 import Textarea from '../common/Textarea'
+import { MAX_ENTRY_HOURS, MIN_ENTRY_HOURS, isValidEntryHours } from '../../utils/timeEntryValidation'
 
 const initialForm = () => {
   return { project: '', description: '', hours: '1' }
@@ -23,7 +24,7 @@ export default function TimeEntryModal({ open, onClose, onSave }) {
     const hours = Number(form.hours)
     if (!form.project) return setError('Select a project for this time entry.')
     if (!form.description.trim()) return setError('Add a short description of the work.')
-    if (!Number.isFinite(hours) || hours < 0.25 || hours > 12) return setError('Hours must be between 0.25 and 12.')
+    if (!isValidEntryHours(hours)) return setError(`Hours must be between ${MIN_ENTRY_HOURS} and ${MAX_ENTRY_HOURS}.`)
     onSave({ project: form.project, description: form.description.trim(), hours, startAt: recordedAt.toISOString() })
     onClose()
   }
@@ -40,7 +41,7 @@ export default function TimeEntryModal({ open, onClose, onSave }) {
               placeholder="Select a project"
               options={projects.map((project) => ({ value: project.name, label: project.name, color: project.color }))}
             />
-            <Input label="Hours" name="hours" type="number" min="0.25" max="12" step="0.25" className="px-3" value={form.hours} onChange={update('hours')} />
+            <Input label="Hours" name="hours" type="number" min={MIN_ENTRY_HOURS} max={MAX_ENTRY_HOURS} step="0.25" className="px-3" value={form.hours} onChange={update('hours')} />
           </div>
           <Textarea label="Description" meta={`${form.description.length}/200`} name="description" placeholder="What did you work on?" maxLength={200} rows={1} value={form.description} onChange={update('description')} />
         </div>

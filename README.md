@@ -5,7 +5,7 @@ Timely is a polished, frontend-only time tracker built to help a team record wor
 ## Features
 
 - Sign up, log in, stay signed in after refresh, and log out.
-- Add a time entry from a modal with a required project, task description, and number of hours.
+- Add a time entry from a modal with a required project, task description, and 0.25 to 8 hours.
 - Automatically capture the current date and time when an entry is saved.
 - See a Monday–Sunday activity view with recorded time, project, and duration.
 - Review hours for the current week, today, progress towards a 40-hour weekly target, and totals by project.
@@ -91,6 +91,8 @@ All direct browser-storage access is isolated in `src/utils/storage.js`.
 - Projects are a pre-filled static list because project administration is outside the requested scope.
 - The timestamp is automatic and not editable, matching the requirement that the current date and time be recorded while keeping logging fast.
 - Weeks start on Monday, matching the supplied visual reference and common work-planning conventions.
+- Each entry accepts 0.25 to 8 hours. This keeps a single task entry practical while still allowing overtime or weekend work through multiple entries.
+- Saturday and Sunday remain part of the weekly view and totals because some teams work outside the standard Monday-Friday schedule.
 - A 40-hour target is a planning indicator only, not a restriction.
 - The current week intentionally starts empty so evaluators can verify the complete add-entry flow. Clearly labelled samples live only in the previous week to demonstrate the populated weekly view.
 - Editing, deleting, timers, and cloud sync are deliberately out of scope so the submission stays focused on the stated objective.

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { addDays, format, isSameDay } from 'date-fns'
-import { CalendarRange, ChevronLeft, ChevronRight, Eye, EyeOff, Plus } from 'lucide-react'
+import { CalendarRange, ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Plus } from 'lucide-react'
 import { projectStyle } from '../../data/projects'
 import { getWeekStart, isToday, weekDays, weekLabel } from '../../utils/dates'
 import { entriesForWeek, formatHours } from '../../utils/timeCalculations'
@@ -111,7 +111,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
                   </div>
                 </div>
               </div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
-              {dayEntries.length ? <button type="button" aria-expanded={expanded} aria-label={`${expanded ? 'Hide' : 'View'} ${format(day, 'EEEE')} entries`} title={`${expanded ? 'Hide' : 'View'} entries`} onClick={() => toggleDay(dayKey)} className="mt-3 grid h-9 w-9 place-items-center rounded-full text-secondary transition hover:bg-primary-container/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:text-primary-container dark:hover:bg-white/10">{expanded ? <EyeOff size={17} /> : <Eye size={17} />}</button> : <span aria-hidden="true" />}
+              {dayEntries.length ? <button type="button" aria-expanded={expanded} aria-label={`${expanded ? 'Hide' : 'View'} ${format(day, 'EEEE')} entries`} title={`${expanded ? 'Hide' : 'View'} entries`} onClick={() => toggleDay(dayKey)} className="mt-3 grid h-9 w-9 place-items-center rounded-full text-secondary transition hover:bg-primary-container/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:text-primary-container dark:hover:bg-white/10">{expanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}</button> : <span aria-hidden="true" />}
             </section>
           )
         })}
