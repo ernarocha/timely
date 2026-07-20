@@ -27,7 +27,7 @@ export function AuthShell({ eyebrow, title, copy, formEyebrow, formTitle, formCo
       <div className="absolute -left-24 top-20 h-72 w-72 rounded-full bg-primary-container/45 blur-3xl" />
       <div className="absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-lime/20 blur-3xl" />
       <div className="relative grid w-full max-w-5xl items-center gap-10 lg:grid-cols-[1fr_460px]">
-        <section className="hidden lg:block">
+        <section className="hidden animate-rise lg:block">
           <div className="mb-10 flex items-center gap-3 text-xl font-extrabold">
             <span className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-primary-container dark:bg-primary-container dark:text-ink">
               <TimerReset />
@@ -42,7 +42,7 @@ export function AuthShell({ eyebrow, title, copy, formEyebrow, formTitle, formCo
           </h1>
           <p className="mt-6 max-w-md text-lg leading-8 text-muted dark:text-white/60">{copy}</p>
         </section>
-        <Card className="relative p-5 sm:p-9">
+        <Card className="relative animate-pop p-5 [animation-delay:80ms] sm:p-9">
           <div className="mb-7 lg:hidden">
             <div className="mb-6 flex items-center gap-3 text-xl font-extrabold">
               <span className="grid h-11 w-11 place-items-center rounded-2xl bg-ink text-primary-container dark:bg-primary-container dark:text-ink">

@@ -48,9 +48,13 @@ export default function Dashboard() {
 
         <div className="grid items-start gap-4 sm:gap-6 xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-8">
           <aside className="grid gap-5 sm:grid-cols-2 xl:sticky xl:top-28 xl:grid-cols-1">
-            <MiniCalendar selectedWeek={selectedWeek} onSelectWeek={setSelectedWeek} />
-            <ProjectSummary totals={metrics.selectedProjects} />
-            <div className="hidden rounded-3xl bg-ink p-5 text-white dark:bg-primary-container dark:text-ink xl:block">
+            <div className="animate-rise [animation-delay:60ms]">
+              <MiniCalendar selectedWeek={selectedWeek} onSelectWeek={setSelectedWeek} />
+            </div>
+            <div className="animate-rise [animation-delay:110ms]">
+              <ProjectSummary totals={metrics.selectedProjects} />
+            </div>
+            <div className="hidden animate-rise rounded-3xl bg-ink p-5 text-white [animation-delay:160ms] dark:bg-primary-container dark:text-ink xl:block">
               <p className="text-lg font-bold">Keep the rhythm.</p>
               <p className="mt-1 text-sm leading-6 text-white/60 dark:text-ink/60">
                 {metrics.selectedCount} {metrics.selectedCount === 1 ? 'entry' : 'entries'} in this
@@ -60,7 +64,7 @@ export default function Dashboard() {
           </aside>
 
           <section className="min-w-0 space-y-6 xl:flex xl:self-stretch xl:flex-col">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid animate-rise gap-4 [animation-delay:80ms] sm:grid-cols-2 lg:grid-cols-3">
               <StatCard
                 label="Week total"
                 value={metrics.selectedHours}
@@ -84,13 +88,15 @@ export default function Dashboard() {
                 progress={(metrics.selectedHours / WEEKLY_HOUR_TARGET) * 100}
               />
             </div>
-            <WeeklyActivity
-              entries={entries}
-              selectedWeek={selectedWeek}
-              onWeekChange={setSelectedWeek}
-              onAddEntry={() => setModalOpen(true)}
-              onEntrySelect={setSelectedEntry}
-            />
+            <div className="animate-rise [animation-delay:150ms] xl:flex xl:flex-1">
+              <WeeklyActivity
+                entries={entries}
+                selectedWeek={selectedWeek}
+                onWeekChange={setSelectedWeek}
+                onAddEntry={() => setModalOpen(true)}
+                onEntrySelect={setSelectedEntry}
+              />
+            </div>
           </section>
         </div>
       </main>
