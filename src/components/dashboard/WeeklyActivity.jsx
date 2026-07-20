@@ -84,7 +84,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
                 <p className={`mt-1 grid h-9 w-9 place-items-center rounded-full text-lg font-bold ${today ? 'bg-lime text-[#293a00]' : 'bg-primary-container/30 dark:bg-white/[.07]'}`}>{format(day, 'd')}</p>
               </div>
 
-              {dayEntries.length ? <div className="min-w-0">
+              {dayEntries.length ? <div className="min-w-0 self-center">
                 <div aria-hidden={!expanded} className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                   <div className="min-h-0 overflow-hidden">
                     <div className="space-y-2">{dayEntries.map((entry) => {
