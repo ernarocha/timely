@@ -33,16 +33,30 @@ export default function Sidebar({ expanded, pinned, onHoverChange, onPinnedChang
           </button>
         </div>
 
-        <nav className="contents md:flex md:w-full md:flex-col md:items-center md:gap-3" aria-label="Primary navigation">
+        <nav
+          className="contents md:flex md:w-full md:flex-col md:items-center md:gap-3"
+          aria-label="Primary navigation"
+        >
           {navItems.map(({ label, Icon, to }) => (
-            <NavLink key={label} to={to} aria-label={label} title={expanded ? undefined : label} className={({ isActive }) => `flex h-12 w-12 items-center justify-center rounded-xl transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 md:h-11 ${expanded ? 'md:w-[152px] md:justify-start md:gap-3 md:px-3' : 'md:w-12'} ${isActive ? 'bg-secondary text-white shadow-md' : 'text-[#514a7a] hover:bg-white/30 dark:text-primary-container dark:hover:bg-white/10'}`}>
+            <NavLink
+              key={label}
+              to={to}
+              aria-label={label}
+              title={expanded ? undefined : label}
+              className={({ isActive }) =>
+                `flex h-12 w-12 items-center justify-center rounded-xl transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 md:h-11 ${expanded ? 'md:w-[152px] md:justify-start md:gap-3 md:px-3' : 'md:w-12'} ${isActive ? 'bg-secondary text-white shadow-md' : 'text-[#514a7a] hover:bg-white/30 dark:text-primary-container dark:hover:bg-white/10'}`
+              }
+            >
               <Icon className="shrink-0" size={21} />
-              {expanded && <span className="hidden whitespace-nowrap text-sm font-semibold md:block">{label}</span>}
+              {expanded && (
+                <span className="hidden whitespace-nowrap text-sm font-semibold md:block">
+                  {label}
+                </span>
+              )}
             </NavLink>
           ))}
         </nav>
       </div>
-
     </aside>
   )
 }

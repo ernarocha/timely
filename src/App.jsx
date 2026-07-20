@@ -12,9 +12,38 @@ export default function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-      <Route path="/overview" element={<ProtectedRoute><ComingSoon title="Overview" description="Deeper reports and team-level insights will live here in a future release." icon={BarChart3} /></ProtectedRoute>} />
-      <Route path="/timer" element={<ProtectedRoute><ComingSoon title="Timer" description="A focused live timer is planned for a future release. Time entries remain available from the dashboard." icon={Clock3} /></ProtectedRoute>} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/overview"
+        element={
+          <ProtectedRoute>
+            <ComingSoon
+              title="Overview"
+              description="Deeper reports and team-level insights will live here in a future release."
+              icon={BarChart3}
+            />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/timer"
+        element={
+          <ProtectedRoute>
+            <ComingSoon
+              title="Timer"
+              description="A focused live timer is planned for a future release. Time entries remain available from the dashboard."
+              icon={Clock3}
+            />
+          </ProtectedRoute>
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )

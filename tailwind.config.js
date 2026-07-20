@@ -33,8 +33,14 @@ export default {
         lift: '0 18px 45px rgba(55, 43, 116, 0.15)',
       },
       keyframes: {
-        rise: { from: { opacity: '0', transform: 'translateY(10px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
-        pop: { from: { opacity: '0', transform: 'scale(.97)' }, to: { opacity: '1', transform: 'scale(1)' } },
+        rise: {
+          from: { opacity: '0', transform: 'translateY(10px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        pop: {
+          from: { opacity: '0', transform: 'scale(.97)' },
+          to: { opacity: '1', transform: 'scale(1)' },
+        },
       },
       animation: { rise: 'rise .45s ease-out both', pop: 'pop .18s ease-out both' },
     },

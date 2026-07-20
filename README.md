@@ -47,6 +47,15 @@ To run the automated tests:
 npm test
 ```
 
+To check code quality and formatting:
+
+```bash
+npm run lint
+npm run format:check
+```
+
+Run `npm run format` to apply the shared Prettier style automatically.
+
 `npm ci` is recommended for a fresh clone because it installs the exact versions recorded in `package-lock.json`.
 
 ## Quick evaluation flow
@@ -61,14 +70,14 @@ npm test
 
 ## How it meets the brief
 
-| Brief requirement | Timely implementation |
-| --- | --- |
+| Brief requirement  | Timely implementation                                                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Track time quickly | A persistent header action opens a focused modal with only the three required inputs. Hours starts at one, and the timestamp is automatic. |
-| User accounts | Signup validates the form and prevents duplicate emails. Login validates saved credentials; protected routes require an active session. |
-| Time entry fields | Every entry stores a static-list project, description, decimal hours, automatic `startAt`, and `createdAt` timestamp. |
-| Weekly work | A compact Monday–Sunday activity view supports previous/next week navigation and a Today shortcut. |
-| Project totals | The Project Summary groups the selected week's entries and shows each project's hours and proportion. |
-| Frontend-only data | All data persists through guarded, namespaced `localStorage` helpers. |
+| User accounts      | Signup validates the form and prevents duplicate emails. Login validates saved credentials; protected routes require an active session.    |
+| Time entry fields  | Every entry stores a static-list project, description, decimal hours, automatic `startAt`, and `createdAt` timestamp.                      |
+| Weekly work        | A compact Monday–Sunday activity view supports previous/next week navigation and a Today shortcut.                                         |
+| Project totals     | The Project Summary groups the selected week's entries and shows each project's hours and proportion.                                      |
+| Frontend-only data | All data persists through guarded, namespaced `localStorage` helpers.                                                                      |
 
 ## Architecture
 
@@ -82,12 +91,12 @@ The app intentionally keeps state close to where it is used:
 
 All direct browser-storage access is isolated in `src/utils/storage.js`.
 
-| Storage key | Value |
-| --- | --- |
-| `tf_users` | Array of `{ id, name, email, password }` |
-| `tf_session` | `{ userId }` or no session |
+| Storage key  | Value                                                                      |
+| ------------ | -------------------------------------------------------------------------- |
+| `tf_users`   | Array of `{ id, name, email, password }`                                   |
+| `tf_session` | `{ userId }` or no session                                                 |
 | `tf_entries` | Array of `{ id, userId, project, description, hours, startAt, createdAt }` |
-| `tf_theme` | `light` or `dark` |
+| `tf_theme`   | `light` or `dark`                                                          |
 
 ## Assumptions and trade-offs
 

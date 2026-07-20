@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { entriesForWeek, formatHours, hoursByProject, hoursThisWeek, hoursToday } from './timeCalculations'
+import {
+  entriesForWeek,
+  formatHours,
+  hoursByProject,
+  hoursThisWeek,
+  hoursToday,
+} from './timeCalculations'
 
 const entries = [
   { project: 'Website Redesign', hours: 1, startAt: '2026-07-13T09:00:00+08:00' },

@@ -5,4 +5,5 @@ export const projects = [
   { name: 'Internal', color: '#bce9ed', text: '#17474c' },
 ]
 
-export const projectStyle = (name) => projects.find((project) => project.name === name) || projects[3]
+export const projectStyle = (name) =>
+  projects.find((project) => project.name === name) || projects[3]

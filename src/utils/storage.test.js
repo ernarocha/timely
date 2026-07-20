@@ -1,10 +1,20 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { clearSession, getEntries, getSession, getTheme, getUsers, saveEntries, saveUsers, setSession, setTheme } from './storage'
+import {
+  clearSession,
+  getEntries,
+  getSession,
+  getTheme,
+  getUsers,
+  saveEntries,
+  saveUsers,
+  setSession,
+  setTheme,
+} from './storage'
 
 function createStorage() {
   const values = new Map()
   return {
-    getItem: vi.fn((key) => values.has(key) ? values.get(key) : null),
+    getItem: vi.fn((key) => (values.has(key) ? values.get(key) : null)),
     setItem: vi.fn((key, value) => values.set(key, String(value))),
     removeItem: vi.fn((key) => values.delete(key)),
   }

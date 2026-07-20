@@ -15,7 +15,11 @@ function readJSON(key, fallback) {
 }
 
 function writeJSON(key, value) {
-  try { localStorage.setItem(key, JSON.stringify(value)) } catch { /* Storage can be unavailable in private mode. */ }
+  try {
+    localStorage.setItem(key, JSON.stringify(value))
+  } catch {
+    /* Storage can be unavailable in private mode. */
+  }
 }
 
 export const getUsers = () => {
@@ -25,18 +29,37 @@ export const getUsers = () => {
 export const saveUsers = (users) => writeJSON(KEYS.users, Array.isArray(users) ? users : [])
 export const getSession = () => readJSON(KEYS.session, null)
 export const setSession = (session) => writeJSON(KEYS.session, session)
-export const clearSession = () => { try { localStorage.removeItem(KEYS.session) } catch { /* noop */ } }
+export const clearSession = () => {
+  try {
+    localStorage.removeItem(KEYS.session)
+  } catch {
+    /* noop */
+  }
+}
 export const getEntries = () => {
   const value = readJSON(KEYS.entries, [])
   return Array.isArray(value) ? value : []
 }
-export const saveEntries = (entries) => writeJSON(KEYS.entries, Array.isArray(entries) ? entries : [])
+export const saveEntries = (entries) =>
+  writeJSON(KEYS.entries, Array.isArray(entries) ? entries : [])
 export const getTheme = () => {
-  try { return localStorage.getItem(KEYS.theme) === 'dark' ? 'dark' : 'light' } catch { return 'light' }
+  try {
+    return localStorage.getItem(KEYS.theme) === 'dark' ? 'dark' : 'light'
+  } catch {
+    return 'light'
+  }
 }
-export const setTheme = (theme) => { try { localStorage.setItem(KEYS.theme, theme === 'dark' ? 'dark' : 'light') } catch { /* noop */ } }
+export const setTheme = (theme) => {
+  try {
+    localStorage.setItem(KEYS.theme, theme === 'dark' ? 'dark' : 'light')
+  } catch {
+    /* noop */
+  }
+}
 export const watchStorage = (listener) => {
-  const handler = (event) => { if (Object.values(KEYS).includes(event.key)) listener(event.key) }
+  const handler = (event) => {
+    if (Object.values(KEYS).includes(event.key)) listener(event.key)
+  }
   window.addEventListener('storage', handler)
   return () => window.removeEventListener('storage', handler)
 }
