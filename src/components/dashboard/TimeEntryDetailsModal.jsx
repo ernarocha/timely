@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import { CalendarDays, Clock3, FolderKanban } from 'lucide-react'
 import { projectStyle } from '../../data/projects'
 import { formatHours } from '../../utils/timeCalculations'
-import Button from '../common/Button'
 import Modal from '../common/Modal'
 
 export default function TimeEntryDetailsModal({ entry, onClose }) {
@@ -33,10 +32,6 @@ export default function TimeEntryDetailsModal({ entry, onClose }) {
           <p className="flex items-center gap-2 text-xs font-semibold text-muted dark:text-white/45"><CalendarDays size={15} /> Recorded</p>
           <p className="mt-3 text-sm font-bold text-ink dark:text-white">{format(start, 'EEEE, MMMM d, yyyy')}</p>
           <p className="mt-1 font-mono text-xs text-muted dark:text-white/50">{format(start, 'h:mm a')}</p>
-        </div>
-
-        <div className="flex justify-end pt-2">
-          <Button variant="soft" onClick={onClose}>Close</Button>
         </div>
       </div>
     </Modal>
