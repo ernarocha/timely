@@ -1,9 +1,10 @@
 import { BarChart3, CalendarDays, Clock3, TimerReset } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 
 const navItems = [
-  { label: 'Overview', Icon: BarChart3 },
-  { label: 'Week', Icon: CalendarDays, active: true },
-  { label: 'Timer', Icon: Clock3 },
+  { label: 'Dashboard', Icon: CalendarDays, to: '/dashboard' },
+  { label: 'Overview', Icon: BarChart3, to: '/overview' },
+  { label: 'Timer', Icon: Clock3, to: '/timer' },
 ]
 
 export default function Sidebar({ expanded, pinned, onHoverChange, onPinnedChange }) {
@@ -33,11 +34,11 @@ export default function Sidebar({ expanded, pinned, onHoverChange, onPinnedChang
         </div>
 
         <nav className="contents md:flex md:w-full md:flex-col md:gap-3" aria-label="Primary navigation">
-          {navItems.map(({ label, Icon, active }) => (
-            <button key={label} type="button" aria-current={active ? 'page' : undefined} aria-label={label} title={expanded ? undefined : label} className={`flex h-11 items-center rounded-xl transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${expanded ? 'md:w-full md:gap-3 md:px-3' : 'w-12 justify-center'} ${active ? 'bg-secondary text-white shadow-md' : 'text-[#514a7a] hover:bg-white/30 dark:text-primary-container dark:hover:bg-white/10'}`}>
+          {navItems.map(({ label, Icon, to }) => (
+            <NavLink key={label} to={to} aria-label={label} title={expanded ? undefined : label} className={({ isActive }) => `flex h-11 items-center rounded-xl transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 ${expanded ? 'md:w-full md:gap-3 md:px-3' : 'w-12 justify-center'} ${isActive ? 'bg-secondary text-white shadow-md' : 'text-[#514a7a] hover:bg-white/30 dark:text-primary-container dark:hover:bg-white/10'}`}>
               <Icon className="shrink-0" size={21} />
               {expanded && <span className="hidden whitespace-nowrap font-semibold md:block">{label}</span>}
-            </button>
+            </NavLink>
           ))}
         </nav>
       </div>

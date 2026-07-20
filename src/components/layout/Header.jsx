@@ -46,7 +46,7 @@ export default function Header({ onAddEntry }) {
           <button onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} className="grid h-11 w-11 place-items-center rounded-full bg-primary-container/30 text-ink transition hover:bg-primary-container/55 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:bg-white/10 dark:text-white dark:hover:bg-white/15">
             {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
           </button>
-          <Button variant="lime" onClick={onAddEntry} className="rounded-full px-4 sm:px-5"><Plus size={18} /><span className="hidden sm:inline">Add time entry</span><span className="sm:hidden">Add</span></Button>
+          {onAddEntry && <Button variant="lime" onClick={onAddEntry} className="rounded-full px-4 sm:px-5"><Plus size={18} /><span className="hidden sm:inline">Add time entry</span><span className="sm:hidden">Add</span></Button>}
           <div ref={profileRef} className="relative">
             <button
               type="button"
