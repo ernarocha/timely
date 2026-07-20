@@ -1,10 +1,10 @@
 import { Navigate } from 'react-router-dom'
 import { TimerReset } from 'lucide-react'
-import LoginForm from '../components/forms/LoginForm'
+import SignInForm from '../components/forms/SignInForm'
 import Card from '../components/common/Card'
 import { useAuth } from '../context/AuthContext'
 
-export default function Login() {
+export default function SignIn() {
   const { user } = useAuth()
   if (user) return <Navigate to="/dashboard" replace />
   return (
@@ -13,10 +13,10 @@ export default function Login() {
       title="Make every hour count."
       copy="A calm, clear view of your week, so logging work never gets in the way of doing it."
       formEyebrow="Account access"
-      formTitle="Log in to Timely"
+      formTitle="Sign in to Timely"
       formCopy="Enter your details to continue to your workspace."
     >
-      <LoginForm />
+      <SignInForm />
     </AuthShell>
   )
 }

@@ -16,7 +16,7 @@ function currentUser() {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(currentUser)
 
-  const login = useCallback((email, password) => {
+  const signIn = useCallback((email, password) => {
     const match = getUsers().find(
       (candidate) =>
         candidate.email === normalizeEmail(email) &&
@@ -49,7 +49,7 @@ export function AuthProvider({ children }) {
     clearSession()
     setUser(null)
   }, [])
-  const value = useMemo(() => ({ user, login, signup, logout }), [user, login, signup, logout])
+  const value = useMemo(() => ({ user, signIn, signup, logout }), [user, signIn, signup, logout])
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 

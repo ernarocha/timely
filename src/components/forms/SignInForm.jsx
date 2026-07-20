@@ -4,8 +4,8 @@ import { useAuth } from '../../context/AuthContext'
 import Button from '../common/Button'
 import Input from '../common/Input'
 
-export default function LoginForm() {
-  const { login } = useAuth()
+export default function SignInForm() {
+  const { signIn } = useAuth()
   const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
@@ -13,7 +13,7 @@ export default function LoginForm() {
   const submit = (event) => {
     event.preventDefault()
     setError('')
-    const result = login(form.email, form.password)
+    const result = signIn(form.email, form.password)
     if (!result.ok) return setError(result.error)
     navigate('/dashboard', { replace: true })
   }
@@ -49,7 +49,7 @@ export default function LoginForm() {
         </p>
       )}
       <Button type="submit" className="w-full">
-        Log in
+        Sign in
       </Button>
       <p className="text-center text-sm text-muted dark:text-white/60">
         New to Timely?{' '}

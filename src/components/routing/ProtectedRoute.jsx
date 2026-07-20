@@ -4,5 +4,5 @@ import { useAuth } from '../../context/AuthContext'
 export default function ProtectedRoute({ children }) {
   const { user } = useAuth()
   const location = useLocation()
-  return user ? children : <Navigate to="/login" replace state={{ from: location.pathname }} />
+  return user ? children : <Navigate to="/signin" replace state={{ from: location.pathname }} />
 }

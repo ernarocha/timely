@@ -80,9 +80,9 @@ export default function SignupForm() {
         Already have an account?{' '}
         <Link
           className="font-bold text-secondary hover:underline dark:text-primary-container"
-          to="/login"
+          to="/signin"
         >
-          Log in
+          Sign in
         </Link>
       </p>
     </form>

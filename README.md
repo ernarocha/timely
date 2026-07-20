@@ -8,7 +8,7 @@ Timely is a polished, frontend-only time tracker built to help a team record wor
 
 ## Features
 
-- Sign up, log in, stay signed in after refresh, and log out.
+- Sign up, sign in, stay signed in after refresh, and log out.
 - Add a time entry from a modal with a required project, task description, and 0.25 to 8 hours.
 - Automatically capture the current date and time when an entry is saved.
 - See a Monday–Sunday activity view with recorded time, project, and duration.
@@ -66,14 +66,14 @@ Run `npm run format` to apply the shared Prettier style automatically.
 4. Choose a project, enter a task description and hours, then select **Save entry**.
 5. The entry appears under today with the time captured when it was saved. The statistics and Project Summary update immediately.
 6. Refresh the browser to confirm entries and the active session persist.
-7. Toggle dark mode, log out, and open `/dashboard` to confirm the route redirects to login.
+7. Toggle dark mode, log out, and open `/dashboard` to confirm the route redirects to sign in.
 
 ## How it meets the brief
 
 | Brief requirement  | Timely implementation                                                                                                                      |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | Track time quickly | A persistent header action opens a focused modal with only the three required inputs. Hours starts at one, and the timestamp is automatic. |
-| User accounts      | Signup validates the form and prevents duplicate emails. Login validates saved credentials; protected routes require an active session.    |
+| User accounts      | Signup validates the form and prevents duplicate emails. Sign in validates saved credentials; protected routes require an active session.  |
 | Time entry fields  | Every entry stores a static-list project, description, decimal hours, automatic `startAt`, and `createdAt` timestamp.                      |
 | Weekly work        | A compact Monday–Sunday activity view supports previous/next week navigation and a Today shortcut.                                         |
 | Project totals     | The Project Summary groups the selected week's entries and shows each project's hours and proportion.                                      |
@@ -83,7 +83,7 @@ Run `npm run format` to apply the shared Prettier style automatically.
 
 The app intentionally keeps state close to where it is used:
 
-- `AuthContext` owns signup, login, logout, and session hydration.
+- `AuthContext` owns signup, sign in, logout, and session hydration.
 - `ThemeContext` owns the persisted light/dark preference.
 - `useTimeEntries` loads and saves entries for the signed-in user.
 - Pure date and calculation utilities derive weekly entries, daily totals, weekly totals, and project totals instead of storing duplicate calculations in state.

@@ -3,13 +3,13 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/routing/ProtectedRoute'
 import ComingSoon from './pages/ComingSoon'
 import Dashboard from './pages/Dashboard'
-import Login from './pages/Login'
+import SignIn from './pages/SignIn'
 import Signup from './pages/Signup'
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route

@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom'
 import SignupForm from '../components/forms/SignupForm'
 import { useAuth } from '../context/AuthContext'
-import { AuthShell } from './Login'
+import { AuthShell } from './SignIn'
 
 export default function Signup() {
   const { user } = useAuth()
