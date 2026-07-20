@@ -30,7 +30,7 @@ export default function TimeEntryModal({ open, onClose, onSave }) {
   return (
     <Modal open={open} onClose={onClose} title="Add time entry" description="Log the work while it’s fresh.">
       <form className="space-y-5" onSubmit={submit}>
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="grid gap-5 sm:grid-cols-[minmax(0,1fr)_128px]">
             <Select
               label="Project"
