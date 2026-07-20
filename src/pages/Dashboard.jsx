@@ -33,7 +33,7 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout onAddEntry={() => setModalOpen(true)}>
-      <main className="mx-auto w-full max-w-[1440px] p-3 sm:p-6 lg:p-8">
+      <main className="mx-auto w-full max-w-[1440px] px-6 py-4 sm:p-6 lg:p-8">
         <div className="mb-6 animate-rise sm:mb-8">
           <p className="font-mono text-[10px] uppercase tracking-[.18em] text-secondary dark:text-primary-container">
             Workspace overview
