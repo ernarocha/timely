@@ -9,7 +9,7 @@ import TimeEntryModal from '../components/forms/TimeEntryModal'
 import { useAuth } from '../context/AuthContext'
 import { useTimeEntries } from '../hooks/useTimeEntries'
 import { getWeekStart } from '../utils/dates'
-import { entriesForWeek, hoursByProject, hoursThisWeek, hoursToday } from '../utils/timeCalculations'
+import { entriesForWeek, hoursByProject, sumHours } from '../utils/timeCalculations'
 
 const WEEKLY_HOUR_TARGET = 40
 
@@ -20,9 +20,10 @@ export default function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false)
   const metrics = useMemo(() => {
     const selectedEntries = entriesForWeek(entries, selectedWeek)
+    const selectedHours = sumHours(selectedEntries)
     return {
-      thisWeek: hoursThisWeek(entries),
-      today: hoursToday(entries),
+      selectedHours,
+      dailyAverage: selectedHours / 7,
       selectedProjects: hoursByProject(selectedEntries),
       selectedCount: selectedEntries.length,
     }
@@ -50,9 +51,9 @@ export default function Dashboard() {
 
           <section className="min-w-0 space-y-6">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <StatCard label="Hours this week" value={metrics.thisWeek} comparison="Monday through Sunday" icon={Clock3} />
-              <StatCard label="Hours today" value={metrics.today} comparison="Your focused time today" icon={Sparkles} accent="lime" />
-              <StatCard label="Weekly target" value={Math.round((metrics.thisWeek / WEEKLY_HOUR_TARGET) * 100)} comparison={`${metrics.thisWeek.toLocaleString(undefined, { maximumFractionDigits: 1 })} of ${WEEKLY_HOUR_TARGET} hrs logged`} icon={Target} accent="peach" unit="% complete" progress={(metrics.thisWeek / WEEKLY_HOUR_TARGET) * 100} />
+              <StatCard label="Week total" value={metrics.selectedHours} comparison="Selected Monday through Sunday" icon={Clock3} />
+              <StatCard label="Daily average" value={metrics.dailyAverage} comparison="Across the selected week" icon={Sparkles} accent="lime" />
+              <StatCard label="Weekly target" value={Math.round((metrics.selectedHours / WEEKLY_HOUR_TARGET) * 100)} comparison={`${metrics.selectedHours.toLocaleString(undefined, { maximumFractionDigits: 1 })} of ${WEEKLY_HOUR_TARGET} hrs logged`} icon={Target} accent="peach" unit="% complete" progress={(metrics.selectedHours / WEEKLY_HOUR_TARGET) * 100} />
             </div>
             <WeeklyActivity entries={entries} selectedWeek={selectedWeek} onWeekChange={setSelectedWeek} onAddEntry={() => setModalOpen(true)} />
           </section>
