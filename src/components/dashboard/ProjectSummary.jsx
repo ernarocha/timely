@@ -7,7 +7,7 @@ export default function ProjectSummary({ totals, label = 'Selected week' }) {
   const rows = projects.map((project) => ({ ...project, hours: totals[project.name] || 0 })).filter((project) => project.hours > 0).sort((a, b) => b.hours - a.hours)
   const total = rows.reduce((sum, project) => sum + project.hours, 0)
   return (
-    <Card className="p-5 sm:p-6">
+    <Card className="p-4 sm:p-6">
       <div className="flex items-center justify-between">
         <div><p className="font-mono text-[10px] uppercase tracking-[.14em] text-muted dark:text-white/45">{label}</p><h2 className="mt-1 text-lg font-bold">Project summary</h2></div>
         <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary-container/50 text-secondary dark:bg-white/10 dark:text-primary-container"><FolderKanban size={19} /></span>

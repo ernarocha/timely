@@ -33,20 +33,20 @@ export default function Header({ onAddEntry }) {
   }
 
   return (
-    <header className="sticky top-0 z-30 min-h-20 border-b border-white/40 bg-[#f0eef8]/85 px-4 backdrop-blur-xl dark:border-white/5 dark:bg-midnight/85 sm:px-6 lg:px-8">
-      <div className="mx-auto flex min-h-20 w-full max-w-[1440px] items-center justify-between gap-4">
+    <header className="sticky top-0 z-30 min-h-16 border-b border-white/40 bg-[#f0eef8]/85 px-3 backdrop-blur-xl dark:border-white/5 dark:bg-midnight/85 sm:min-h-20 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-16 w-full max-w-[1440px] items-center justify-between gap-3 sm:min-h-20 sm:gap-4">
         <div className="flex min-w-0 items-center gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink text-primary-container dark:bg-primary-container dark:text-ink md:hidden"><span className="font-mono text-sm font-bold">TF</span></span>
-          <div>
+          <div className="hidden sm:block">
             <p className="text-lg font-extrabold leading-tight text-ink dark:text-white">TimeFrame</p>
             <p className="hidden truncate text-xs text-muted dark:text-white/50 sm:block">Good to see you, {user?.name?.split(' ')[0]}.</p>
           </div>
         </div>
-        <div className="flex items-center gap-2 sm:gap-3">
-          <button onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} className="grid h-11 w-11 place-items-center rounded-full bg-primary-container/30 text-ink transition hover:bg-primary-container/55 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:bg-white/10 dark:text-white dark:hover:bg-white/15">
+        <div className="flex items-center gap-1.5 sm:gap-3">
+          <button onClick={toggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`} className="grid h-10 w-10 place-items-center rounded-full bg-primary-container/30 text-ink transition hover:bg-primary-container/55 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 sm:h-11 sm:w-11">
             {theme === 'dark' ? <Sun size={19} /> : <Moon size={19} />}
           </button>
-          {onAddEntry && <Button variant="lime" onClick={onAddEntry} className="rounded-full px-4 sm:px-5"><Plus size={18} /><span className="hidden sm:inline">Add time entry</span><span className="sm:hidden">Add</span></Button>}
+          {onAddEntry && <Button variant="lime" onClick={onAddEntry} className="min-h-10 rounded-full px-3 sm:min-h-11 sm:px-5"><Plus size={18} /><span className="hidden sm:inline">Add time entry</span><span className="sm:hidden">Add</span></Button>}
           <div ref={profileRef} className="relative">
             <button
               type="button"
@@ -54,9 +54,9 @@ export default function Header({ onAddEntry }) {
               aria-label="Open profile menu"
               aria-haspopup="menu"
               aria-expanded={profileOpen}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-white p-1 text-ink shadow-sm transition hover:shadow-ambient focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:bg-white/10 dark:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white p-1 text-ink shadow-sm transition hover:shadow-ambient focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:bg-white/10 dark:text-white sm:h-11 sm:w-11"
             >
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-secondary text-xs font-bold text-white">{initials}</span>
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-secondary text-[11px] font-bold text-white sm:h-9 sm:w-9 sm:text-xs">{initials}</span>
             </button>
 
             {profileOpen && (

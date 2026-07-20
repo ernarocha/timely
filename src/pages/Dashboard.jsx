@@ -33,14 +33,14 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout onAddEntry={() => setModalOpen(true)}>
-      <main className="mx-auto w-full max-w-[1440px] p-4 sm:p-6 lg:p-8">
+      <main className="mx-auto w-full max-w-[1440px] p-3 sm:p-6 lg:p-8">
         <div className="mb-6 animate-rise sm:mb-8">
           <p className="font-mono text-[10px] uppercase tracking-[.18em] text-secondary dark:text-primary-container">Workspace overview</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-[-.03em] text-ink dark:text-white sm:text-4xl">Your week, clearly.</h1>
+          <h1 className="mt-2 text-2xl font-bold tracking-[-.03em] text-ink dark:text-white sm:text-4xl">Your week, clearly.</h1>
           <p className="mt-2 max-w-xl text-sm text-muted dark:text-white/55 sm:text-base">Log the work, spot the patterns, and keep every project moving.</p>
         </div>
 
-        <div className="grid items-start gap-6 xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-8">
+        <div className="grid items-start gap-4 sm:gap-6 xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-8">
           <aside className="grid gap-5 sm:grid-cols-2 xl:sticky xl:top-28 xl:grid-cols-1">
             <MiniCalendar selectedWeek={selectedWeek} onSelectWeek={setSelectedWeek} />
             <ProjectSummary totals={metrics.selectedProjects} />

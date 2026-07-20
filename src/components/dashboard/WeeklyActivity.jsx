@@ -13,13 +13,13 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
 
   return (
     <Card className="max-w-[1080px] overflow-hidden">
-      <div className="flex flex-col gap-4 px-5 pb-3 pt-5 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:pb-3 sm:pt-6">
-        <div><p className="font-mono text-[10px] uppercase tracking-[.16em] text-muted dark:text-white/45">Weekly activity</p><h2 className="mt-1 text-xl font-bold sm:text-2xl">{weekLabel(selectedWeek)}</h2></div>
-        <div className="flex items-center gap-2">
-          <button onClick={() => onWeekChange(getWeekStart())} className="h-10 rounded-full bg-surface-low px-4 text-sm font-semibold transition hover:bg-primary-container/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:bg-white/10 dark:hover:bg-white/15">Today</button>
+      <div className="flex items-end justify-between gap-2 px-4 pb-3 pt-4 sm:items-center sm:px-6 sm:pb-3 sm:pt-6">
+        <div className="min-w-0"><p className="font-mono text-[9px] uppercase tracking-[.14em] text-muted dark:text-white/45 sm:text-[10px] sm:tracking-[.16em]">Weekly activity</p><h2 className="mt-1 whitespace-nowrap text-base font-bold sm:text-2xl">{weekLabel(selectedWeek)}</h2></div>
+        <div className="flex shrink-0 items-center gap-2">
+          <button onClick={() => onWeekChange(getWeekStart())} className="h-9 rounded-full bg-surface-low px-3 text-xs font-semibold transition hover:bg-primary-container/30 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/50 dark:bg-white/10 dark:hover:bg-white/15 sm:h-10 sm:px-4 sm:text-sm">Today</button>
           <div className="flex rounded-full bg-surface-low p-1 dark:bg-white/10">
-            <button aria-label="Previous week" onClick={() => onWeekChange(addDays(selectedWeek, -7))} className="grid h-8 w-8 place-items-center rounded-full transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:hover:bg-white/10"><ChevronLeft size={17} /></button>
-            <button aria-label="Next week" onClick={() => onWeekChange(addDays(selectedWeek, 7))} className="grid h-8 w-8 place-items-center rounded-full transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:hover:bg-white/10"><ChevronRight size={17} /></button>
+            <button aria-label="Previous week" onClick={() => onWeekChange(addDays(selectedWeek, -7))} className="grid h-7 w-7 place-items-center rounded-full transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:hover:bg-white/10 sm:h-8 sm:w-8"><ChevronLeft size={17} /></button>
+            <button aria-label="Next week" onClick={() => onWeekChange(addDays(selectedWeek, 7))} className="grid h-7 w-7 place-items-center rounded-full transition hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary dark:hover:bg-white/10 sm:h-8 sm:w-8"><ChevronRight size={17} /></button>
           </div>
         </div>
       </div>
@@ -42,8 +42,8 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
           </div>
         </div>
       ) : <div>
-        <div className="grid border-b border-line px-5 pb-3 dark:border-white/5 sm:grid-cols-[76px_minmax(0,1fr)] sm:px-6">
-          <span className="hidden sm:block" aria-hidden="true" />
+        <div className="grid grid-cols-[44px_minmax(0,1fr)] border-b border-line px-2 pb-3 dark:border-white/5 sm:grid-cols-[76px_minmax(0,1fr)] sm:px-6">
+          <span aria-hidden="true" />
           <div className="flex min-w-0 gap-3 px-3.5">
             <span className="w-1 shrink-0" aria-hidden="true" />
             <div className="flex min-w-0 flex-1 gap-2 font-mono text-[10px] font-semibold uppercase tracking-[.14em] text-muted dark:text-white/45">
@@ -58,7 +58,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
           const dayEntries = visibleEntries.filter((entry) => isSameDay(new Date(entry.startAt), day)).sort((a, b) => new Date(a.startAt) - new Date(b.startAt))
           const today = isToday(day)
           return (
-            <section key={day.toISOString()} className={`grid gap-3 px-5 py-4 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)] sm:items-start sm:px-6 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
+            <section key={day.toISOString()} className={`grid grid-cols-[44px_minmax(0,1fr)] items-start gap-2 px-2 py-3 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)] sm:gap-3 sm:px-6 sm:py-4 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
               <div className="flex flex-col items-center gap-0">
                 <p className="font-mono text-[10px] uppercase tracking-wide text-muted dark:text-white/45">{format(day, 'EEE')}</p>
                 <p className={`mt-1 grid h-9 w-9 place-items-center rounded-full text-lg font-bold ${today ? 'bg-lime text-[#293a00]' : 'bg-primary-container/30 dark:bg-white/[.07]'}`}>{format(day, 'd')}</p>
@@ -67,7 +67,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
               {dayEntries.length ? <div className="space-y-2">{dayEntries.map((entry) => {
                 const project = projectStyle(entry.project)
                 return (
-                  <button type="button" key={entry.id} onClick={() => onEntrySelect(entry)} aria-label={`View details for ${entry.description}`} className="flex w-full min-w-0 items-center gap-3 rounded-2xl border border-white/80 bg-white px-3.5 py-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-ambient focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:border-white/5 dark:bg-white/[.055]">
+                  <button type="button" key={entry.id} onClick={() => onEntrySelect(entry)} aria-label={`View details for ${entry.description}`} className="flex w-full min-w-0 items-center gap-2 rounded-2xl border border-white/80 bg-white px-3 py-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:shadow-ambient focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:border-white/5 dark:bg-white/[.055] sm:gap-3 sm:px-3.5">
                     <span className="h-9 w-1 shrink-0 rounded-full" style={{ backgroundColor: project.color }} />
                     <div className="flex min-w-0 flex-1 items-center gap-2">
                       <div className="min-w-0 flex-1 basis-0"><p className="truncate text-sm font-bold text-ink dark:text-white">{entry.project}</p><p className="mt-0.5 font-mono text-[10px] leading-none text-muted dark:text-white/45">{format(new Date(entry.startAt), 'h:mm a')}</p></div>
@@ -76,7 +76,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
                     </div>
                   </button>
                 )
-              })}</div> : <div className="flex min-h-11 items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 sm:self-center dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
+              })}</div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
             </section>
           )
         })}

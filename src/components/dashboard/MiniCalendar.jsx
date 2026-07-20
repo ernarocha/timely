@@ -18,7 +18,7 @@ export default function MiniCalendar({ selectedWeek, onSelectWeek }) {
   const weekEnd = getWeekEnd(selectedWeek)
 
   return (
-    <section className="rounded-3xl border border-white/25 bg-primary-container/30 p-5 dark:border-white/5 dark:bg-white/[.06]">
+    <section className="rounded-3xl border border-white/25 bg-primary-container/30 p-4 dark:border-white/5 dark:bg-white/[.06] sm:p-5">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-bold">{format(month, 'MMMM yyyy')}</h2>
         <div className="flex gap-1">
