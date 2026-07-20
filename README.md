@@ -1,6 +1,6 @@
-# TimeFrame
+# Timely
 
-TimeFrame is a polished, frontend-only time tracker built to help a team record work in a few clicks. It uses React, Vite, Tailwind CSS, React Router, date-fns, Lucide icons, and browser `localStorage`—no backend or database is required.
+Timely is a polished, frontend-only time tracker built to help a team record work in a few clicks. It uses React, Vite, Tailwind CSS, React Router, date-fns, Lucide icons, and browser `localStorage`—no backend or database is required.
 
 ## Features
 
@@ -57,7 +57,7 @@ npm test
 
 ## How it meets the brief
 
-| Brief requirement | TimeFrame implementation |
+| Brief requirement | Timely implementation |
 | --- | --- |
 | Track time quickly | A persistent header action opens a focused modal with only the three required inputs. Hours starts at one, and the timestamp is automatic. |
 | User accounts | Signup validates the form and prevents duplicate emails. Login validates saved credentials; protected routes require an active session. |

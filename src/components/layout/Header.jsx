@@ -38,7 +38,7 @@ export default function Header({ onAddEntry }) {
         <div className="flex min-w-0 items-center gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-ink text-primary-container dark:bg-primary-container dark:text-ink md:hidden"><span className="font-mono text-sm font-bold">TF</span></span>
           <div className="hidden sm:block">
-            <p className="text-lg font-extrabold leading-tight text-ink dark:text-white">TimeFrame</p>
+            <p className="text-lg font-extrabold leading-tight text-ink dark:text-white">Timely</p>
             <p className="hidden truncate text-xs text-muted dark:text-white/50 sm:block">Good to see you, {user?.name?.split(' ')[0]}.</p>
           </div>
         </div>

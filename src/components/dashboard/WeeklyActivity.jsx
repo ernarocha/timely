@@ -52,7 +52,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
             <p className="mt-5 font-mono text-[10px] uppercase tracking-[.18em] text-secondary dark:text-primary-container">Nothing logged yet</p>
             <h3 className="mt-2 text-xl font-bold text-ink dark:text-white">{viewingCurrentWeek ? 'Your week is ready.' : 'No entries for this week.'}</h3>
             <p className="mt-2 max-w-sm text-sm leading-6 text-muted dark:text-white/50">
-              {viewingCurrentWeek ? 'Add your first task and TimeFrame will build your weekly totals automatically.' : 'Return to the current week to record new work with the automatic timestamp.'}
+              {viewingCurrentWeek ? 'Add your first task and Timely will build your weekly totals automatically.' : 'Return to the current week to record new work with the automatic timestamp.'}
             </p>
             <Button className="mt-5" variant="lime" onClick={viewingCurrentWeek ? onAddEntry : () => onWeekChange(getWeekStart())}>
               {viewingCurrentWeek && <Plus size={18} />}

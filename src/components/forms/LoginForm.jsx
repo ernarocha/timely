@@ -25,7 +25,7 @@ export default function LoginForm() {
       <Input label="Password" name="password" type="password" autoComplete="current-password" placeholder="Enter your password" value={form.password} onChange={(event) => setForm({ ...form, password: event.target.value })} required />
       {error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-950/40 dark:text-red-300">{error}</p>}
       <Button type="submit" className="w-full">Sign in <ArrowRight size={18} /></Button>
-      <p className="text-center text-sm text-muted dark:text-white/60">New to TimeFrame? <Link className="font-bold text-secondary hover:underline dark:text-primary-container" to="/signup">Create an account</Link></p>
+      <p className="text-center text-sm text-muted dark:text-white/60">New to Timely? <Link className="font-bold text-secondary hover:underline dark:text-primary-container" to="/signup">Create an account</Link></p>
     </form>
   )
 }

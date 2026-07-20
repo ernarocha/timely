@@ -29,7 +29,7 @@ export default function Sidebar({ expanded, pinned, onHoverChange, onPinnedChang
             className={`flex h-12 items-center rounded-2xl bg-ink text-primary-container shadow-sm transition focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50 dark:bg-primary-container dark:text-ink ${expanded ? 'w-[152px] gap-3 px-3' : 'w-12 justify-center'}`}
           >
             <TimerReset className="shrink-0" size={24} />
-            {expanded && <span className="whitespace-nowrap text-lg font-extrabold">TimeFrame</span>}
+            {expanded && <span className="whitespace-nowrap text-lg font-extrabold">Timely</span>}
           </button>
         </div>
 

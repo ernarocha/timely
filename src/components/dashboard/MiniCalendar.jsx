@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { addMonths, eachDayOfInterval, endOfMonth, format, isSameDay, isSameMonth, isWithinInterval, startOfMonth, subMonths } from 'date-fns'
+import { addMonths, eachDayOfInterval, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, isWithinInterval, startOfMonth, startOfWeek, subMonths } from 'date-fns'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getWeekEnd, getWeekStart } from '../../utils/dates'
 
@@ -11,8 +11,8 @@ export default function MiniCalendar({ selectedWeek, onSelectWeek }) {
   }, [selectedWeek])
 
   const days = useMemo(() => {
-    const first = getWeekStart(startOfMonth(month))
-    const last = getWeekEnd(endOfMonth(month))
+    const first = startOfWeek(startOfMonth(month), { weekStartsOn: 0 })
+    const last = endOfWeek(endOfMonth(month), { weekStartsOn: 0 })
     return eachDayOfInterval({ start: first, end: last })
   }, [month])
   const weekEnd = getWeekEnd(selectedWeek)
@@ -26,7 +26,7 @@ export default function MiniCalendar({ selectedWeek, onSelectWeek }) {
           <button aria-label="Next month" onClick={() => setMonth((value) => addMonths(value, 1))} className="grid h-8 w-8 place-items-center rounded-lg transition hover:bg-white/60 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-container/60 dark:hover:bg-white/10"><ChevronRight size={17} /></button>
         </div>
       </div>
-      <div className="grid grid-cols-7 text-center text-[11px] font-semibold text-muted dark:text-white/45">{['M','T','W','T','F','S','S'].map((day, i) => <span key={`${day}-${i}`} className="py-1">{day}</span>)}</div>
+      <div className="grid grid-cols-7 text-center text-[11px] font-semibold text-muted dark:text-white/45">{['S','M','T','W','T','F','S'].map((day, i) => <span key={`${day}-${i}`} className="py-1">{day}</span>)}</div>
       <div className="mt-1 grid grid-cols-7 gap-y-1 text-center text-xs">
         {days.map((day) => {
           const inWeek = isWithinInterval(day, { start: getWeekStart(selectedWeek), end: weekEnd })
