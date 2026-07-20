@@ -27,7 +27,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange }) 
           const dayEntries = visibleEntries.filter((entry) => isSameDay(new Date(entry.startAt), day)).sort((a, b) => new Date(a.startAt) - new Date(b.startAt))
           const today = isToday(day)
           return (
-            <section key={day.toISOString()} className={`grid gap-3 px-5 py-4 transition sm:grid-cols-[76px_minmax(0,1fr)] sm:items-start sm:px-6 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
+            <section key={day.toISOString()} className={`grid gap-3 px-5 py-4 transition-colors duration-200 sm:grid-cols-[76px_minmax(0,1fr)] sm:items-start sm:px-6 ${today ? 'bg-lime/[.045]' : 'hover:bg-surface-low/55 dark:hover:bg-white/[.025]'}`}>
               <div className="flex flex-col items-center gap-0">
                 <p className="font-mono text-[10px] uppercase tracking-wide text-muted dark:text-white/45">{format(day, 'EEE')}</p>
                 <p className={`mt-1 grid h-9 w-9 place-items-center rounded-full text-lg font-bold ${today ? 'bg-lime text-[#293a00]' : 'bg-primary-container/30 dark:bg-white/[.07]'}`}>{format(day, 'd')}</p>
