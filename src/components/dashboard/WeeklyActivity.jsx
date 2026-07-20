@@ -107,7 +107,7 @@ export default function WeeklyActivity({ entries, selectedWeek, onWeekChange, on
                 </div>
                 <div aria-hidden={expanded} className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${expanded ? 'grid-rows-[0fr] opacity-0' : 'grid-rows-[1fr] opacity-100'}`}>
                   <div className="min-h-0 overflow-hidden">
-                    <div className="flex min-h-11 items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> {dayEntries.length} {dayEntries.length === 1 ? 'entry' : 'entries'} · {formatHours(dayHours)}h logged</div>
+                    <div className="flex min-h-11 items-center gap-2 rounded-2xl border border-dashed border-secondary/40 px-4 text-sm text-muted/70 dark:border-primary-container/35 dark:text-white/35"><CalendarRange size={15} /> {dayEntries.length} {dayEntries.length === 1 ? 'entry' : 'entries'} · {formatHours(dayHours)}h logged</div>
                   </div>
                 </div>
               </div> : <div className="flex min-h-11 self-center items-center gap-2 rounded-2xl border border-dashed border-line px-4 text-sm text-muted/70 dark:border-white/10 dark:text-white/35"><CalendarRange size={15} /> No time logged</div>}
