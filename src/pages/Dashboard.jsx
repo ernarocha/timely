@@ -45,8 +45,7 @@ export default function Dashboard() {
             <MiniCalendar selectedWeek={selectedWeek} onSelectWeek={setSelectedWeek} />
             <ProjectSummary totals={metrics.selectedProjects} />
             <div className="hidden rounded-3xl bg-ink p-5 text-white dark:bg-primary-container dark:text-ink xl:block">
-              <Sparkles size={20} className="text-lime dark:text-secondary" />
-              <p className="mt-5 text-lg font-bold">Keep the rhythm.</p>
+              <p className="text-lg font-bold">Keep the rhythm.</p>
               <p className="mt-1 text-sm leading-6 text-white/60 dark:text-ink/60">{metrics.selectedCount} {metrics.selectedCount === 1 ? 'entry' : 'entries'} in this selected week.</p>
             </div>
           </aside>
